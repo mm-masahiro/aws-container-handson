@@ -33,3 +33,14 @@ resource "aws_subnet" "application_subnet_1c" {
     "Type" = "Isolated"
   }
 }
+
+resource "aws_route_table" "application_route_table" {
+  vpc_id = var.aws_vpc_id
+  tags = {
+    "Name" = "application_route_table"
+  }
+}
+
+# resource "aws_route_table_association" "application_route_table_association_1a" {
+  
+# }

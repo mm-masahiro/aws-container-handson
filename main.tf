@@ -1,4 +1,7 @@
 variable aws_vpc_id {}
+variable aws_route_table_id {}
+variable aws_subnet_id_1a {}
+variable aws_subnet_id_1c {}
 
 resource "aws_vpc" "container_handson_vpc" {
   cidr_block = "10.0.0.0/16"
@@ -41,6 +44,12 @@ resource "aws_route_table" "application_route_table" {
   }
 }
 
-# resource "aws_route_table_association" "application_route_table_association_1a" {
-  
-# }
+resource "aws_route_table_association" "application_route_table_association_1a" {
+  route_table_id = var.aws_route_table_id
+  subnet_id = var.aws_subnet_id_1a
+}
+
+resource "aws_route_table_association" "application_route_table_association_1c" {
+  route_table_id = var.aws_route_table_id
+  subnet_id = var.aws_subnet_id_1c
+}

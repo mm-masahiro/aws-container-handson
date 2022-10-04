@@ -2,6 +2,7 @@ variable aws_vpc_id {}
 variable aws_route_table_id {}
 variable aws_subnet_id_1a {}
 variable aws_subnet_id_1c {}
+variable aws_igw_id {}
 
 resource "aws_vpc" "container_handson_vpc" {
   cidr_block = "10.0.0.0/16"
@@ -53,3 +54,17 @@ resource "aws_route_table_association" "application_route_table_association_1c" 
   route_table_id = var.aws_route_table_id
   subnet_id = var.aws_subnet_id_1c
 }
+
+# Internet Gateway
+resource "aws_internet_gateway" "internet_gateway" {
+  tags = {
+    "Name" = "container_handson_internet_gateway"
+  }
+}
+
+resource "aws_internet_gateway_attachment" "internet_gateway_attachment" {
+  vpc_id = var.aws_vpc_id
+  internet_gateway_id = var.aws_igw_id
+}
+
+# Security Group

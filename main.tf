@@ -68,3 +68,45 @@ resource "aws_internet_gateway_attachment" "internet_gateway_attachment" {
 }
 
 # Security Group
+resource "aws_security_group" "name" {
+  ingress = [{
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "from 0.0.0.0/0:80"
+    from_port = 80
+    protocol = "tcp"
+    to_port = 80
+    ipv6_cidr_blocks = ["::/0"]
+    prefix_list_ids = []
+    security_groups = []
+    self = false
+  }]
+
+  # ingress = [ {
+  #   cidr_blocks = [ "value" ]
+  #   description = "value"
+  #   from_port = 1
+  #   protocol = "value"
+  #   to_port = 1
+  #   ipv6_cidr_blocks = [ "value" ]
+  #   prefix_list_ids = [ "value" ]
+  #   security_groups = [ "value" ]
+  #   self = false
+  # } ]
+
+  egress = [{
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "Allow all outbound traffic by default"
+    protocol = "-1"
+    from_port = 0
+    to_port = 0
+    ipv6_cidr_blocks = []
+    prefix_list_ids = []
+    security_groups = []
+    self = false
+  }]
+
+  vpc_id = var.aws_vpc_id
+ tags = {
+  "Name" = "container_handson_security_group"
+ } 
+}

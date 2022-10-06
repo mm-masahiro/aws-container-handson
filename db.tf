@@ -19,3 +19,20 @@ resource "aws_subnet" "db_subnet_1c" {
     "Type" = "Isolated"
   }
 }
+
+resource "aws_route_table" "db_route_table" {
+  vpc_id = var.aws_vpc_id
+  tags = {
+    "Name": "db_route_table"
+  }
+}
+
+resource "aws_route_table_association" "db_route_table_association_1a" {
+  route_table_id = var.aws_db_route_table_id
+  subnet_id = var.aws_db_subnet_id_1a
+}
+
+resource "aws_route_table_association" "db_route_table_association_1c" {
+  route_table_id = var.aws_db_route_table_id
+  subnet_id = var.aws_db_subnet_id_1c
+}

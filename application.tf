@@ -30,11 +30,11 @@ resource "aws_route_table" "application_route_table" {
 }
 
 resource "aws_route_table_association" "application_route_table_association_1a" {
-  route_table_id = var.aws_route_table_id
-  subnet_id = var.aws_subnet_id_1a
+  route_table_id = var.aws_application_route_table_id
+  subnet_id = var.aws_application_subnet_id_1a
 }
 
 resource "aws_route_table_association" "application_route_table_association_1c" {
-  route_table_id = var.aws_route_table_id
-  subnet_id = var.aws_subnet_id_1c
+  route_table_id = var.aws_application_route_table_id
+  subnet_id = var.aws_application_subnet_id_1c
 }

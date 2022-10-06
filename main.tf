@@ -1,7 +1,10 @@
 variable aws_vpc_id {}
-variable aws_route_table_id {}
-variable aws_subnet_id_1a {}
-variable aws_subnet_id_1c {}
+variable aws_application_route_table_id {}
+variable aws_db_route_table_id {}
+variable aws_application_subnet_id_1a {}
+variable aws_application_subnet_id_1c {}
+variable aws_db_subnet_id_1a {}
+variable aws_db_subnet_id_1c {}
 variable aws_igw_id {}
 
 resource "aws_vpc" "container_handson_vpc" {

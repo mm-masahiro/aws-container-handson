@@ -1,11 +1,17 @@
 variable aws_vpc_id {}
+variable aws_igw_id {}
+
 variable aws_application_route_table_id {}
-variable aws_db_route_table_id {}
 variable aws_application_subnet_id_1a {}
 variable aws_application_subnet_id_1c {}
+
+variable aws_db_route_table_id {}
 variable aws_db_subnet_id_1a {}
 variable aws_db_subnet_id_1c {}
-variable aws_igw_id {}
+
+variable aws_ingress_route_table_id {}
+variable aws_public_ingress_subnet_id_1a {}
+variable aws_public_ingress_subnet_id_1c {}
 
 resource "aws_vpc" "container_handson_vpc" {
   cidr_block = "10.0.0.0/16"
@@ -82,4 +88,21 @@ resource "aws_subnet" "igress_subnet_1c" {
     "Name" = "public-ingress-1c"
     "Type" = "Public"
   }
+}
+
+resource "aws_route_table" "ingress_route_table" {
+  vpc_id = var.aws_vpc_id
+  tags = {
+    "Name" = "ingress_route_table"
+  }
+}
+
+resource "aws_route_table_association" "ingress_route_table_association_1a" {
+  route_table_id = var.aws_ingress_route_table_id
+  subnet_id = var.aws_public_ingress_subnet_id_1a
+}
+
+resource "aws_route_table_association" "ingress_route_table_association_1c" {
+  route_table_id = var.aws_ingress_route_table_id
+  subnet_id = var.aws_public_ingress_subnet_id_1c
 }

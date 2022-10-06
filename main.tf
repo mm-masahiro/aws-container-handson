@@ -61,3 +61,25 @@ resource "aws_security_group" "name" {
   "Name" = "container_handson_security_group"
  } 
 }
+
+resource "aws_subnet" "igress_subnet_1a" {
+  cidr_block = "10.0.0.0/24"
+  vpc_id = var.aws_vpc_id
+  availability_zone = "ap-northeast-1a"
+  map_public_ip_on_launch = true
+  tags = {
+    "Name" = "public-ingress-1a"
+    "Type" = "Public"
+  }
+}
+
+resource "aws_subnet" "igress_subnet_1c" {
+  cidr_block = "10.0.1.0/24"
+  vpc_id = var.aws_vpc_id
+  availability_zone = "ap-northeast-1c"
+  map_public_ip_on_launch = true
+  tags = {
+    "Name" = "public-ingress-1c"
+    "Type" = "Public"
+  }
+}
